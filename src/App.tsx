@@ -12,16 +12,3 @@ function App() {
 }
 
 export default App;
-
-
-{/* <div className="content">
-      <div className='content-app'>
-        <h1>Заявления</h1>
-        <Button
-          icon={<CalculatorOutlined />}
-          onClick={() => dispatch(showModalOrder())}>
-          Калькулятор
-        </Button>
-      </div>
-    </div>
-    <ModalFormHolder /> */}

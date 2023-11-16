@@ -4,6 +4,7 @@ export const modalSlice = createSlice({
     name: 'modal',
     initialState: {
         showModal: false,
+        showModalEdit: false,
         iin: null as string | null,
         fullName: null as string | null,
         phoneNumber: null as string | null,
@@ -14,6 +15,12 @@ export const modalSlice = createSlice({
         },
         closeModal: state => {
             state.showModal = false;
+        },
+        showModalEdit: state => {
+            state.showModalEdit = true;
+        },
+        closeModalEdit: state => {
+            state.showModalEdit = false;
         },
         IIN: (state, action) => {
             state.iin = action.payload;
@@ -27,4 +34,11 @@ export const modalSlice = createSlice({
     }
 })
 
-export const { showModalOrder, closeModal, IIN, FullName, PhoneNumber } = modalSlice.actions
+export const {
+    showModalOrder,
+    closeModal,
+    showModalEdit,
+    closeModalEdit,
+    IIN,
+    FullName,
+    PhoneNumber } = modalSlice.actions

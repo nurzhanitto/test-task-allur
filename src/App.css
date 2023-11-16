@@ -36,6 +36,12 @@
   font-weight: bold;
 }
 
+.content-app button:hover {
+  background-color: #ff2e1f;
+  color: #fff !important;
+  border: none;
+}
+
 .content .huge-text {
   text-align: center;
   font-size: 3em;

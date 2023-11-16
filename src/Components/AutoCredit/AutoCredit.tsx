@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { Button, Card, Col, Row } from 'antd';
 import { EditOutlined, PhoneOutlined } from '@ant-design/icons';
-import { TState } from "../../store";
+import { TState, dispatch } from "../../store";
+import { showModalEdit } from "../../store/modal.slice";
 import "./AutoCredit.css";
 
 export const AutoCredit = () => {
@@ -12,7 +13,7 @@ export const AutoCredit = () => {
             <div className="card long-card">
                 <div className="card-header">
                     <h4>{fullName}</h4>
-                    <Button className="edit-button" type="text">
+                    <Button className="edit-button" onClick={() => dispatch(showModalEdit())} type="text">
                         <EditOutlined />
                     </Button>
                 </div>
