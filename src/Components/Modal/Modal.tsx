@@ -1,16 +1,24 @@
 import { ChangeEvent, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { Button, Modal, Input, Row, Col } from "antd";
 import { TState, dispatch } from "../../store";
-import { closeModal } from "../../store/modal.slice";
+import { closeModal, FullName, IIN, PhoneNumber } from "../../store/modal.slice";
 import "./Modal.css";
 
 const ModalWindow = () => {
+    let navigate = useNavigate();
     const { showModal } = useSelector((state: TState) => state.modal);
     const [iin, setIIN] = useState<string>('');
+    const [fullName, setFullName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+
     const handleOk = () => {
+        dispatch(IIN(iin))
+        dispatch(FullName(fullName))
+        dispatch(PhoneNumber(phoneNumber))
         dispatch(closeModal())
+        navigate("/auto-credit")
     }
     const handleCancel = () => {
         dispatch(closeModal())
@@ -22,11 +30,15 @@ const ModalWindow = () => {
         setIIN(sanitizedValue);
     };
 
-    // const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFullNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setFullName(value);
+    };
 
-    //     setPhoneNumber(formattedValue);
-    // };
-
+    const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setPhoneNumber(value);
+    }
 
     return <>
         <Modal
@@ -47,11 +59,18 @@ const ModalWindow = () => {
                         value={iin}
                         onChange={handleIINChange}
                     />
-                    <Input placeholder="ФИО клиента" />
+
+                    <Input
+                        placeholder="ФИО клиента"
+                        value={fullName}
+                        onChange={handleFullNameChange}
+                    />
+
                     <Input
                         placeholder="Номер телефона"
                         maxLength={18}
                         value={phoneNumber}
+                        onChange={handlePhoneNumberChange}
                     />
                 </div>
 
@@ -63,7 +82,7 @@ const ModalWindow = () => {
                             </Button>
                         </Col>
                         <Col span={12}>
-                            <Button block>
+                            <Button block onClick={handleOk}>
                                 Далее
                             </Button>
                         </Col>

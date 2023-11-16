@@ -34,6 +34,7 @@
 }
 
 .modal-buttons button {
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,8 +48,8 @@
 }
 
 .modal-buttons button:hover {
-    background-color: orange;
-    color: #fff;
+    background-color: #ff2e1f;
+    color: #fff !important;
     border: none;
 }
 

@@ -1,15 +1,20 @@
 import React from 'react';
-import { Button } from 'antd';
-import { CalculatorOutlined } from '@ant-design/icons';
-import { dispatch } from './store';
-import { showModalOrder } from './store/modal.slice';
-import { ModalFormHolder } from './Components/ModalFormHolder';
+import { BrowserRouter } from 'react-router-dom';
+import { WorkSpace } from './Components/WorkSpace';
 import './App.css';
 
 function App() {
-  // const { showModal } = useSelector((state: TState) => state.modal);
   return <>
-    <div className="content">
+    <BrowserRouter>
+      <WorkSpace />
+    </BrowserRouter>
+  </>
+}
+
+export default App;
+
+
+{/* <div className="content">
       <div className='content-app'>
         <h1>Заявления</h1>
         <Button
@@ -19,8 +24,4 @@ function App() {
         </Button>
       </div>
     </div>
-    <ModalFormHolder />
-  </>
-}
-
-export default App;
+    <ModalFormHolder /> */}
