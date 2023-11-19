@@ -1,10 +1,29 @@
 import { useSelector } from "react-redux";
-import { Button, Card, Col, Row } from 'antd';
-import { EditOutlined, PhoneOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { EditOutlined, PhoneOutlined, CalculatorOutlined } from '@ant-design/icons';
 import { TState, dispatch } from "../../store";
-import { showModalEdit } from "../../store/modal.slice";
+import { showModalEdit, showModalOrder } from "../../store/modal.slice";
 import { TwoCards } from "../TwoCards/TwoCards";
 import "./AutoCredit.css";
+
+export const MainPage = () => {
+    return <>
+        <div className="content">
+            <div className='content-app'>
+                <h1>Заявления</h1>
+                <Button
+                    icon={<CalculatorOutlined />}
+                    onClick={() => dispatch(showModalOrder())}>
+                    Калькулятор
+                </Button>
+            </div>
+
+            <div className="huge-text">
+                <h1>Тут таблица</h1>
+            </div>
+        </div>
+    </>
+}
 
 export const AutoCredit = () => {
     const { iin, fullName, phoneNumber } = useSelector((state: TState) => state.modal);

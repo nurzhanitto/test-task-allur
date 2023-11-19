@@ -14,3 +14,65 @@
     color: #001529;
     margin: 15px;
 }
+
+.ant-collapse-item {
+    border-bottom: none !important;
+}
+
+.ant-collapse-content {
+    border-top: none !important;
+}
+
+.bank-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bank-content-border {
+    border-bottom: 1px solid #b3bac3;
+}
+
+.bank-content-border h3 {
+    margin: 0;
+}
+
+.bank-percent {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.bank-content-margin-top {
+    margin-top: 10px;
+}
+
+.bank-content-color {
+    color: #b3bac3
+}
+
+.bank-content-font-weight {
+    font-weight: bolder;
+}
+
+.printer-button {
+    margin-top: 10px;
+}
+
+.printer-button button {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #001529;
+    border: 1px solid #001529;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.printer-button button:hover {
+    background-color: #ff2e1f;
+    color: #fff !important;
+    border: none;
+}

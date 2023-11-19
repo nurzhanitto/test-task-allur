@@ -5,10 +5,10 @@ import { TState, dispatch } from "../../store";
 import { closeModalCar, setBrand, setModel, setYear } from "../../store/modal.slice";
 
 const ModalCar = () => {
-    const { showModalCar } = useSelector((state: TState) => state.modal);
-    const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-    const [selectedModel, setSelectedModel] = useState<string | null>(null);
-    const [selectedYear, setSelectedYear] = useState<string | null>(null);
+    const { showModalCar, brand, model, year } = useSelector((state: TState) => state.modal);
+    const [selectedBrand, setSelectedBrand] = useState<string | null>(brand);
+    const [selectedModel, setSelectedModel] = useState<string | null>(model);
+    const [selectedYear, setSelectedYear] = useState<string | null>(year);
 
     const handleCancel = () => {
         dispatch(closeModalCar());
