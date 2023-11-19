@@ -5,9 +5,13 @@ export const modalSlice = createSlice({
     initialState: {
         showModal: false,
         showModalEdit: false,
+        showModalCar: false,
         iin: null as string | null,
         fullName: null as string | null,
         phoneNumber: null as string | null,
+        brand: null as string | null,
+        model: null as string | null,
+        year: null as string | null,
     },
     reducers: {
         showModalOrder: state => {
@@ -22,6 +26,12 @@ export const modalSlice = createSlice({
         closeModalEdit: state => {
             state.showModalEdit = false;
         },
+        showModalCar: state => {
+            state.showModalCar = true;
+        },
+        closeModalCar: state => {
+            state.showModalCar = false;
+        },
         IIN: (state, action) => {
             state.iin = action.payload;
         },
@@ -31,6 +41,15 @@ export const modalSlice = createSlice({
         PhoneNumber: (state, action) => {
             state.phoneNumber = action.payload;
         },
+        setBrand: (state, action) => {
+            state.brand = action.payload;
+        },
+        setModel: (state, action) => {
+            state.model = action.payload;
+        },
+        setYear: (state, action) => {
+            state.year = action.payload
+        }
     }
 })
 
@@ -39,6 +58,11 @@ export const {
     closeModal,
     showModalEdit,
     closeModalEdit,
+    showModalCar,
+    closeModalCar,
     IIN,
     FullName,
-    PhoneNumber } = modalSlice.actions
+    PhoneNumber,
+    setBrand,
+    setModel,
+    setYear } = modalSlice.actions

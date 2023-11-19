@@ -25,7 +25,7 @@ const ModalWindow = () => {
     }
 
     const handleIINChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.slice(0, 11);
+        const value = e.target.value.slice(0, 12);
         const sanitizedValue = value.replace(/\D/g, '');
         setIIN(sanitizedValue);
     };
@@ -36,9 +36,19 @@ const ModalWindow = () => {
     };
 
     const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setPhoneNumber(value);
+        const inputValue = e.target.value;
+        const numericValue = inputValue.replace(/\D/g, '');
+        let formattedPhoneNumber = '';
+
+        if (numericValue.length > 1) {
+            formattedPhoneNumber = `+7 (${numericValue.slice(1, 4)}) ${numericValue.slice(4, 7)}-${numericValue.slice(7, 9)}-${numericValue.slice(9, 11)}`;
+        } else if (numericValue.length === 1) {
+            formattedPhoneNumber = `+7 (${numericValue}`;
+        }
+        setPhoneNumber(formattedPhoneNumber);
     }
+
+    const isButtonDisabled = iin.length !== 12 || !fullName || phoneNumber.length !== 18;
 
     return <>
         <Modal
@@ -55,7 +65,7 @@ const ModalWindow = () => {
                 <div className="modal-inputs">
                     <Input
                         placeholder="ИИН клиента"
-                        maxLength={11}
+                        maxLength={12}
                         value={iin}
                         onChange={handleIINChange}
                     />
@@ -82,7 +92,7 @@ const ModalWindow = () => {
                             </Button>
                         </Col>
                         <Col span={12}>
-                            <Button block onClick={handleOk}>
+                            <Button block onClick={handleOk} disabled={isButtonDisabled}>
                                 Далее
                             </Button>
                         </Col>

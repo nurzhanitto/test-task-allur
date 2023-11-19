@@ -3,6 +3,7 @@ import { Button, Card, Col, Row } from 'antd';
 import { EditOutlined, PhoneOutlined } from '@ant-design/icons';
 import { TState, dispatch } from "../../store";
 import { showModalEdit } from "../../store/modal.slice";
+import { TwoCards } from "../TwoCards/TwoCards";
 import "./AutoCredit.css";
 
 export const AutoCredit = () => {
@@ -29,5 +30,7 @@ export const AutoCredit = () => {
                 <p>Номер телефона</p>
             </div>
         </div>
+
+        <TwoCards />
     </>
 }

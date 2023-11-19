@@ -1,0 +1,16 @@
+.two-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.long-card {
+    min-width: 400px;
+}
+
+.two-card h4 {
+    color: #001529;
+    margin: 15px;
+}

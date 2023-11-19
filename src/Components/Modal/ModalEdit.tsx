@@ -1,15 +1,36 @@
+import { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { TState, dispatch } from "../../store";
 import { Button, Input, Modal } from "antd";
-import { closeModalEdit } from "../../store/modal.slice";
+import { FullName, IIN, closeModalEdit } from "../../store/modal.slice";
 import "./Modal.css";
 
 const ModalEdit = () => {
     const { showModalEdit, iin, fullName } = useSelector((state: TState) => state.modal);
-
+    const [editIIN, setEditIIN] = useState(iin);
+    const [editFullName, setEditFullName] = useState(fullName);
     const handleCancel = () => {
         dispatch(closeModalEdit())
     }
+
+    const handleSave = () => {
+        dispatch(IIN(editIIN));
+        dispatch(FullName(editFullName));
+        dispatch(closeModalEdit())
+    }
+
+    const handleIINChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.slice(0, 12);
+        const sanitizedValue = value.replace(/\D/g, '');
+        setEditIIN(sanitizedValue);
+    };
+
+    const handleFullNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setEditFullName(value);
+    };
+
+    const isButtonDisabled = editIIN?.length !== 12 || !editFullName;
 
     return <>
         <Modal
@@ -25,21 +46,21 @@ const ModalEdit = () => {
                 <div className="modal-inputs">
                     <Input
                         placeholder="ИИН клиента"
-                        maxLength={11}
-                        value={iin || ''}
-                    // onChange={handleIINChange}
+                        maxLength={12}
+                        value={editIIN || ''}
+                        onChange={handleIINChange}
                     />
 
                     <Input
                         placeholder="ФИО клиента"
-                        value={fullName || ''}
-                    // onChange={handleFullNameChange}
+                        value={editFullName || ''}
+                        onChange={handleFullNameChange}
                     />
 
                 </div>
 
                 <div className="modal-buttons modal-edit-button">
-                    <Button block>
+                    <Button block onClick={handleSave} disabled={isButtonDisabled}>
                         Сохранить
                     </Button>
                 </div>
