@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Card, Collapse, Image, Input, InputNumber, Select, Switch } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Button, Card, Collapse, Image, Input, InputNumber, Radio, Select, Switch } from "antd";
 import { EditOutlined, PlusOutlined, MinusOutlined, PrinterOutlined } from '@ant-design/icons';
 import { showModalCar } from "../../store/modal.slice";
 import { TState, dispatch } from "../../store";
@@ -28,6 +29,7 @@ const months = [
 ];
 
 export const TwoCards = () => {
+    let navigate = useNavigate();
     const { brand, model, year } = useSelector((state: TState) => state.modal);
     const [loading, setLoading] = useState<boolean>(false);
     const [tradingPoint, setTradingPoint] = useState<string | undefined>("");
@@ -38,8 +40,16 @@ export const TwoCards = () => {
 
     const [activePanel, setActivePanel] = useState<string | string[]>(['1'])
 
-    const displayValue = `${brand || ''} ${model ? `${model},` : ''} ${year || ''}`;
-    const isPlaceholderVisible = brand === null && model === null && year === null;
+    const displayValue = () => {
+        if (brand && year && model) {
+            return `${brand} ${model}, ${year}`
+        }
+        else {
+            return ""
+        }
+    };
+    // `${brand || ''} ${model ? `${model},` : ''} ${year || ''}`
+    // const isPlaceholderVisible = (brand === null && model === null && year === null);
 
     const handleTradingPointChange = (value: string) => {
         setTradingPoint(value);
@@ -242,7 +252,6 @@ export const TwoCards = () => {
     ];
 
 
-
     return <>
         <div style={{ width: '1000px', display: 'flex', marginLeft: '20px' }}>
             <Card className="your-card" style={{ flex: 1, backgroundColor: 'white', alignSelf: 'flex-start' }}>
@@ -253,14 +262,14 @@ export const TwoCards = () => {
                     <Select
                         placeholder="Торговая точка"
                         style={{ width: '48%', height: '40px', }}
-                        value={tradingPoint}
+                        value={tradingPoint || undefined}
                         onChange={handleTradingPointChange}>
                         <Select.Option value="option1">Doscar</Select.Option>
                     </Select>
                     <Select
                         placeholder="Тип авто"
                         style={{ width: '48%', height: '40px', }}
-                        value={carType}
+                        value={carType || undefined}
                         onChange={handleCarTypeChange}>
                         <Select.Option value="option1">Б/У</Select.Option>
                         <Select.Option value="option2">Новое</Select.Option>
@@ -275,8 +284,8 @@ export const TwoCards = () => {
                             borderBottom: '1px solid #d9d9d9',
                             borderRight: 'none',
                         }}
-                        value={displayValue}
-                        placeholder={isPlaceholderVisible ? "Марка, модель и год выпуска" : ""} />
+                        value={displayValue()}
+                        placeholder="Марка, модель и год выпуска" />
                     <Button onClick={() => dispatch(showModalCar())}
                         style={{
                             width: '10%', height: '40px',
@@ -292,7 +301,7 @@ export const TwoCards = () => {
                 <div className="card-content" style={{ display: 'flex', justifyContent: 'space-between', marginTop: "10px" }}>
                     <InputNumber
                         value={amount}
-                        style={{ width: '48%', height: '40px', }}
+                        style={{ width: '48%', height: '40px', paddingTop: '6px' }}
                         placeholder="Стоимость авто"
                         onChange={p => setAmount(p || 0)}
                         size="small" className="of-input repo-amount-open"
@@ -301,7 +310,7 @@ export const TwoCards = () => {
 
                     <InputNumber
                         value={firstPayment}
-                        style={{ width: '48%', height: '40px', }}
+                        style={{ width: '48%', height: '40px', paddingTop: '6px' }}
                         placeholder="Первоначальный взнос"
                         onChange={p => setFirstPayment(p || 0)}
                         size="small" className="of-input repo-amount-open"
@@ -337,36 +346,52 @@ export const TwoCards = () => {
 
                 {
                     (brand && model && year && tradingPoint && carType && amount !== undefined && firstPayment !== undefined && selectedTimeMoney !== undefined) ?
-                        <div className="card-content">
-                            <Collapse
-                                style={{ border: 'none' }}
-                                activeKey={activePanel}
-                                onChange={handlePanelChange}
-                                items={items}
-                                defaultActiveKey={['1']}
-                                expandIcon={({ isActive }) => isActive ? <MinusOutlined /> : <PlusOutlined />}
-                                expandIconPosition="end" >
-                                {items.map(item => (
-                                    <Panel
-                                        key={item.key as string}
-                                        style={{
-                                            marginBottom: '20px',
-                                            backgroundColor: activePanel.includes(item.key) ? '#f5f9ff' : '',
-                                        }}
-                                        header={
-                                            <div>
-                                                <Image src={item.icon} preview={false} style={{ marginRight: '8px', height: '20px' }} /> {item.label}
-                                            </div>}>
-                                        {item.children}
-                                    </Panel>
-                                ))}
-                            </Collapse>
-                        </div>
+                        <>
+                            <div className="card-content">
+                                <Radio.Group style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                                    <Radio.Button
+                                        style={{ flex: 1, textAlign: 'center' }}
+                                        value="standard">Стандарт
+                                    </Radio.Button>
+                                    <Radio.Button style={{ flex: 1, textAlign: 'center' }} value="subsidy">Субсидия</Radio.Button>
+                                </Radio.Group>
+                            </div>
+                            <div className="card-content" style={{ marginTop: '20px' }}>
+                                <Collapse
+                                    style={{ border: 'none' }}
+                                    activeKey={activePanel}
+                                    onChange={handlePanelChange}
+                                    items={items}
+                                    defaultActiveKey={['1']}
+                                    expandIcon={({ isActive }) => isActive ? <MinusOutlined /> : <PlusOutlined />}
+                                    expandIconPosition="end" >
+                                    {items.map(item => (
+                                        <Panel
+                                            key={item.key as string}
+                                            className="bank-panel"
+                                            style={{
+                                                marginBottom: '20px',
+                                                backgroundColor: activePanel.includes(item.key) ? '#f5f9ff' : '',
+                                            }}
+                                            header={
+                                                <div>
+                                                    <Image src={item.icon} preview={false} style={{ marginRight: '8px', height: '20px' }} /> {item.label}
+                                                </div>}>
+                                            {item.children}
+                                        </Panel>
+                                    ))}
+                                </Collapse>
+                            </div>
+
+                            <div className="printer-button" style={{ marginTop: '20px' }}>
+                                <Button onClick={() => navigate("/")} block>Создать заявку</Button>
+                            </div>
+                        </>
                         :
                         <div>
                             <span>Заполните все параметры, чтобы получить предварительные решения от банков</span>
                             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                <Image src={icon} style={{ width: '50px', height: '50px' }} />
+                                <Image src={icon} style={{ width: '100px', height: '100px' }} />
                             </div>
                         </div>
                 }

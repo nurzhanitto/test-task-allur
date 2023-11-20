@@ -32,9 +32,9 @@
     border-bottom: 1px solid #b3bac3;
 }
 
-.bank-content-border h3 {
+/* .bank-content-border h3 {
     margin: 0;
-}
+} */
 
 .bank-percent {
     color: red;
@@ -51,6 +51,10 @@
 
 .bank-content-font-weight {
     font-weight: bolder;
+}
+
+.bank-panel {
+    margin-bottom: 10px;
 }
 
 .printer-button {
