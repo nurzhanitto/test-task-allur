@@ -1,6 +1,10 @@
 const IN = new Intl.NumberFormat('ru-RU', {minimumFractionDigits: 0});
 export const countNum = (num: number): string => {
-    return IN.format(num) + " ₸"
+    if(num) {
+        return IN.format(num) + " ₸"
+    }
+
+    else return ""
 }
 export const parseNum = (num: string, d: number = 0): number => {
     const cleanNum = num.replace(/\s/igm, "").replace(",", ".");
