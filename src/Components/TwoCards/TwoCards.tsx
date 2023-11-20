@@ -141,12 +141,12 @@ export const TwoCards = () => {
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма займа</span>
-                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
+                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма переплаты с учетом КАСКО</span>
-                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
+                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
@@ -184,12 +184,12 @@ export const TwoCards = () => {
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма займа</span>
-                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
+                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма переплаты с учетом КАСКО</span>
-                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
+                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
@@ -227,12 +227,12 @@ export const TwoCards = () => {
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма займа</span>
-                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
+                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
                     <span className="bank-content-color">Сумма переплаты с учетом КАСКО</span>
-                    <span className="bank-content-font-weight">{countNum(loanWithoutInsurance)}</span>
+                    <span className="bank-content-font-weight">{countNum(totalLoan)}</span>
                 </div>
 
                 <div className="bank-content bank-content-margin-top">
